@@ -1,0 +1,23 @@
+# RMarkdown 보고서
+
+
+1.**dplyr**사용 완료
+```{R}
+library(dplyr)
+library(readxl)
+day_care <- read.csv('day_care_center.csv')
+df_day_care_ep <- day_care %>% filter(gu == '은평구')
+df_day_care_ep <- df_day_care_ep %>% arrange(desc(teacher_num))
+top_tnum <- head(df_day_care_ep,10)
+```
+
+
+2.**ggplot** *막대그래프* 사용 완료
+```{r}
+library(ggplot2)
+ggplot(data = top_tnum, 
+       aes(x=reorder(top_tnum$day_care_name,top_tnum$teacher_num),
+                                  y=top_tnum$nursing_room_num))+geom_col()+coord_flip()
+```
+
+[자료 출처](https://dacon.io/competitions/open/235537/data)
